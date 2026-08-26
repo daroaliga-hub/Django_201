@@ -3,7 +3,14 @@
 
 
 {% block title %}
-        {% comment %} Change the Title {% endcomment %}
+        Home Page
 {% endblock title %}
 
-{% block block %} From home-page{% endblock block %}
+{% block block %}
+        
+        {% for post in posts %}
+                {{post.text}} was writing at {{post.date}}<hr>
+        {% endfor %}
+                
+
+{% endblock block %}
