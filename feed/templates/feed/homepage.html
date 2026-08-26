@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our page</title>
-</head>
-<body>
-    hi
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+        {% comment %} Change the Title {% endcomment %}
+{% endblock title %}
+
+{% block block %} From home-page{% endblock block %}
