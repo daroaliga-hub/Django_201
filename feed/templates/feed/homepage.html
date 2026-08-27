@@ -1,6 +1,5 @@
 {% extends 'base.html' %} {% block title %} Home Page {% endblock title %} 
-{%block block %} 
-        <h1>Posts: {{ posts }}</h1>
+{%block content %} 
         {% for post in posts %}
         <!-- component is from https://tailwindcomponents.com/component/post-artical -->
         <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" style='width: 50rem'>
@@ -23,7 +22,7 @@
                                 <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
                         </a>
                 </div>
-                </div
+        </div>
         </div>
         {% endfor %} 
-{% endblock block %}
+{% endblock content %}
