@@ -27,48 +27,51 @@ $.ajaxSetup({
         }
     },
 });
-$(document).on("click", ".js-toggle-modal", function(e){
-    e.preventDefault()
-    $(".js-modal").toggleClass("hidden")
-})
-.on("click",".js-submit",function(e){
-    e.preventDefault()
-    const text = $(".js-post-text").val().trim()
-
-    if(!text.length){
-        return false
-    }
-    $(".js-modal").addClass("hidden")
-    $(".js-post-text").val('')
+$(document)
+    .on("click", ".js-toggle-modal", function(e) {
+        e.preventDefault();
+        $(".js-modal").toggleClass("hidden");
+    })
 
     .on("click", ".js-submit", function(e) {
-    e.preventDefault()
-    const text = $(".js-post-text").val().trim()
-    const $btn = $(this)
+        e.preventDefault();
 
-    if(!text.length) {
-        return false
-    }
+        const $btn = $(this);
+        const $textarea = $(".js-post-text");
+        const text = $textarea.val().trim();
+        const $label = $btn.find("span");
 
-    $btn.prop("disabled", true).text("Posting!")
-    $.ajax({
-        type: 'POST',
-        url: $(".js-post-text").data("post-url"),
-        data: {
-            text: text
-        },
-        success: (dataHtml) => {
-            $(".js-modal").addClass("hidden");
-            $("#posts-container").prepend(dataHtml);
-            $btn.prop("disabled", false).text("New Post");
-            $(".js-post-text").val('')
-        },
-        error: (error) => {
-            console.warn(error)
-            $btn.prop("disabled", false).text("Error");
+        if (!text.length) {
+            return false;
         }
+
+        $btn.prop("disabled", true);
+        $label.text("Posting!");
+
+        $.ajax({
+            type: "POST",
+            url: $textarea.data("post-url"),
+
+            data: {
+                text: text
+            },
+
+            success: function(dataHtml) {
+                $(".js-modal").addClass("hidden");
+
+                $(".post-container").prepend(dataHtml);
+
+                $textarea.val("");
+
+                $btn.prop("disabled", false);
+                $label.text("Create Post");
+            },
+
+            error: function(xhr) {
+                console.error(xhr.responseText);
+
+                $btn.prop("disabled", false);
+                $label.text("Error");
+            }
+        });
     });
-})
-
-
-})
