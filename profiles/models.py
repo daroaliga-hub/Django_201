@@ -11,6 +11,12 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         related_name="profile"
     )
+    follows = models.ManyToManyField(
+        "self",
+        symmetrical=False,
+        related_name="followed_by",
+        blank=True
+    )
     image = ImageField(upload_to='profiles')
     def __str__(self):
         return self.user.username
